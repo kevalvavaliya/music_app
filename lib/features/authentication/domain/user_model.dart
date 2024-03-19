@@ -1,8 +1,8 @@
-class AppUser {
+class UserModel {
   final String uid;
   final String email;
 
-  AppUser({required this.uid, required this.email});
+  UserModel({required this.uid, required this.email});
 
   Map<String, dynamic> toMap() {
     return {
@@ -11,10 +11,13 @@ class AppUser {
     };
   }
 
-  factory AppUser.fromMap(Map<String, dynamic> map) {
-    return AppUser(
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       uid: map['uid'],
       email: map['email'],
     );
   }
+
+  @override
+  String toString() => 'UserModel(uid: $uid, email: $email)';
 }
