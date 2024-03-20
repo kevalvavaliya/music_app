@@ -20,11 +20,11 @@ class LoginScreen extends StatelessWidget {
     final email = emailController.text;
     final password = passController.text;
     if (email.isEmpty || password.isEmpty) {
-      CustomSnackBar.showSnackBar(context, 'Please enter email and password');
+      CustomSnackBar.showSnackbar(context, 'Please enter email and password');
       return;
     }
     if (password.length < 6) {
-      CustomSnackBar.showSnackBar(
+      CustomSnackBar.showSnackbar(
           context, 'Password should be atleast 6 characters');
       return;
     }
@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
         .read<AuthenticationProvider>()
         .loginOrSignup(email, password);
     if (status != FirebaseAuthStatus.success && context.mounted) {
-      CustomSnackBar.showSnackBar(
+      CustomSnackBar.showSnackbar(
           context, 'Error while login or signup - ${status.name}');
     }
   }

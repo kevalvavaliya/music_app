@@ -30,7 +30,6 @@ class _PlayerWidgetState extends State<PlayerWidget> {
   StreamSubscription? _durationSubscription;
   StreamSubscription? _positionSubscription;
 
-
   String get _durationText => _duration?.toString().split('.').first ?? '';
 
   String get _positionText => _position?.toString().split('.').first ?? '';
@@ -74,13 +73,19 @@ class _PlayerWidgetState extends State<PlayerWidget> {
   Widget build(BuildContext context) {
     // If the current song is playing then show player button and slider according to its state.
     final songsProvider = context.watch<SongsProvider>();
-    SongState songState =  songsProvider.isSongCurrentPlaying(widget.song)? songsProvider.getCurrentPlayingSongState():SongState.stopped;
+    SongState songState = songsProvider.isSongCurrentPlaying(widget.song)
+        ? songsProvider.getCurrentPlayingSongState()
+        : SongState.stopped;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        // Player button 
-        PlayerButton(songState: songState, song: widget.song),
-        
+        // Player button
+        PlayerButton(
+          songState: songState,
+          song: widget.song,
+          size: 50,
+        ),
+
         // slider
         songState == SongState.stopped
             ? Slider(
@@ -106,7 +111,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
         songState == SongState.stopped
             ? const Text(
                 '00:00/00:00',
-                style: const TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0),
               )
             : Text(
                 _position != null
@@ -128,9 +133,5 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     _positionSubscription = player.onPositionChanged.listen(
       (p) => setState(() => _position = p),
     );
-   
   }
-
-  
-  
 }

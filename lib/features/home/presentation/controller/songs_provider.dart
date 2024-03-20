@@ -6,6 +6,8 @@ import 'package:music_app/features/home/domain/song_model.dart';
 
 class SongsProvider extends ChangeNotifier {
   final AudioPlayer _audioPlayer = AudioHelper.instance.audioPlayer;
+  
+
   SongModel? currentPLayingSong;
 
   SongsProvider() {
@@ -25,8 +27,7 @@ class SongsProvider extends ChangeNotifier {
   void playSong(SongModel song) async {
     setCurrentPlayingSong(song.copyWith(songState: SongState.playing));
     await _audioPlayer.play(UrlSource(song.musicLink));
-    _audioPlayer.onPlayerStateChanged.listen((event) {
-    });
+    _audioPlayer.onPlayerStateChanged.listen((event) {});
   }
 
   // pausing song and updating player state to paused
@@ -70,6 +71,9 @@ class SongsProvider extends ChangeNotifier {
     }
     return currentPLayingSong!.songState;
   }
+
+  
+  
 
   @override
   void dispose() {

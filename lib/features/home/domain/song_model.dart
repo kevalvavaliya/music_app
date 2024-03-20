@@ -7,6 +7,7 @@ class SongModel {
   String artistName;
   bool isFavourite;
   SongState songState;
+  String coverImage;
 
   SongModel({
     required this.musicId,
@@ -15,6 +16,7 @@ class SongModel {
     required this.artistName,
     this.isFavourite = false,
     this.songState = SongState.stopped,
+    required this.coverImage,
   });
 
   SongModel copyWith({
@@ -24,6 +26,7 @@ class SongModel {
     String? artistName,
     bool? isFavourite,
     SongState? songState,
+    String? coverImage,
   }) {
     return SongModel(
       musicId: musicId ?? this.musicId,
@@ -31,7 +34,8 @@ class SongModel {
       musicLink: musicLink ?? this.musicLink,
       artistName: artistName ?? this.artistName,
       isFavourite: isFavourite ?? this.isFavourite,
-      songState: songState??this.songState,
+      songState: songState ?? this.songState,
+      coverImage:coverImage?? this.coverImage,
     );
   }
 
@@ -41,6 +45,7 @@ class SongModel {
       musicName: map['musicName'],
       musicLink: map['musicLink'],
       artistName: map['artistName'],
+      coverImage: map['coverImage'],
     );
   }
 
@@ -50,12 +55,12 @@ class SongModel {
       'musicName': musicName,
       'musicLink': musicLink,
       'artistName': artistName,
+      'coverImage':coverImage,
     };
   }
 
   @override
-    String toString() {
-      return 'SongModel(musicId: $musicId, musicName: $musicName, musicLink: $musicLink, artistName: $artistName, isFavourite: $isFavourite, songState: $songState)';
-    }
-  
+  String toString() {
+    return 'SongModel(musicId: $musicId, musicName: $musicName, musicLink: $musicLink, artistName: $artistName, isFavourite: $isFavourite, songState: $songState coverimage: $coverImage)';
+  }
 }

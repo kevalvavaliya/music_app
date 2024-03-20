@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/comman/util/enums.dart';
 import 'package:music_app/comman/util/player_helper.dart';
+import 'package:music_app/comman/widgets/custom_favourite_song_button.dart';
 import 'package:music_app/features/home/domain/song_model.dart';
-import 'package:music_app/features/home/presentation/controller/songs_provider.dart';
+import 'package:music_app/features/home/presentation/widgets/current_playing_song_text.dart';
 import 'package:music_app/features/home/presentation/widgets/player_widget.dart';
-import 'package:provider/provider.dart';
 
 class SongDetailScreen extends StatelessWidget {
   const SongDetailScreen({super.key, required this.song});
@@ -13,31 +12,64 @@ class SongDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-    
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.network('https://picsum.photos/200/300?image=0'),
-            const SizedBox(
-              height: 20,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Hero(
+              tag: song.musicId,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                width: double.infinity,
+                child: Image.network(
+                  song.coverImage,
+                  fit: BoxFit.cover,
+                ),
+              )),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      CurrentPlayingSongText(
+                        text: song.musicName,
+                        textSize: 40,
+                        song: song,
+                      ),
+                      CustomFavouriteSongButton(
+                        song: song,
+                        size: 35,
+                      ),
+                    ],
+                  ),
+                  FittedBox(
+                    child: Text(
+                      song.artistName,
+                      style: const TextStyle(fontSize: 22),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  PlayerWidget(
+                    player: AudioHelper.instance.audioPlayer,
+                    song: song,
+                  )
+                ],
+              ),
             ),
-            Text(song.musicName),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(song.artistName),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              child: PlayerWidget(player: AudioHelper.instance.audioPlayer,song: song,))
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

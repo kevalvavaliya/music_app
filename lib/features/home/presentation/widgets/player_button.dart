@@ -5,9 +5,11 @@ import 'package:music_app/features/home/presentation/controller/songs_provider.d
 import 'package:provider/provider.dart';
 
 class PlayerButton extends StatelessWidget {
-  const PlayerButton({super.key, required this.songState, required this.song});
+  const PlayerButton(
+      {super.key, required this.songState, required this.song, this.size = 30});
   final SongState songState;
   final SongModel song;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,10 @@ class PlayerButton extends StatelessWidget {
           onPressed: () {
             context.read<SongsProvider>().playSong(song);
           },
-          icon: const Icon(Icons.play_arrow_sharp));
+          icon: Icon(
+            Icons.play_arrow,
+            size: size,
+          ));
     }
     // if song is  playing return pause button
     else if (songState == SongState.playing) {
@@ -25,7 +30,7 @@ class PlayerButton extends StatelessWidget {
           onPressed: () {
             context.read<SongsProvider>().pauseSong();
           },
-          icon: const Icon(Icons.pause));
+          icon: Icon(Icons.pause, size: size));
     }
     // if song is paused return resume button
     else if (songState == SongState.paused) {
@@ -33,7 +38,7 @@ class PlayerButton extends StatelessWidget {
           onPressed: () {
             context.read<SongsProvider>().resumeSong();
           },
-          icon: const Icon(Icons.play_arrow));
+          icon: Icon(Icons.play_arrow, size: size));
     }
     // if song is resumed return pause button
     else {
@@ -41,7 +46,7 @@ class PlayerButton extends StatelessWidget {
           onPressed: () {
             context.read<SongsProvider>().pauseSong();
           },
-          icon: const Icon(Icons.pause));
+          icon: Icon(Icons.pause, size: size));
     }
   }
 }

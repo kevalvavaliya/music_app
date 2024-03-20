@@ -5,13 +5,14 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:music_app/comman/util/constants.dart';
 import 'package:music_app/features/authentication/domain/user_model.dart';
+import 'package:music_app/features/home/domain/song_model.dart';
 
 class UserRepository {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  // store user in firestore
   Future<void> storeUserInFirestore(UserModel user) async {
     try {
-      // store user in firestore
       await _firestore
           .collection(Constants.USERS_COLLECTION)
           .doc(user.uid)
@@ -22,9 +23,9 @@ class UserRepository {
     }
   }
 
+  // get user from firestore
   Future<UserModel?> getUserFromFirestore(String uid) async {
     try {
-      // get user from firestore
       DocumentSnapshot<Map<String, dynamic>> userDoc = await _firestore
           .collection(Constants.USERS_COLLECTION)
           .doc(uid)
@@ -39,4 +40,32 @@ class UserRepository {
       return null;
     }
   }
+
+  // update user song favourite list into firestore
+  Future<bool> updateUserSongFavouriteList(UserModel user) async {
+    try {
+      await _firestore
+          .collection(Constants.USERS_COLLECTION)
+          .doc(user.uid)
+          .update({'favouriteSongs': user.favouriteSongs});
+      return true;
+    } catch (e) {
+      log('Error in updating favourite songs list $e');
+      return false;
+    }
+  }
+
+  Future<SongModel?> fetchSongFromFirebstoreUsingId(String id) async {
+    final QuerySnapshot results = await _firestore
+        .collection(Constants.SONGS_COLLECTION)
+        .where('musicId', isEqualTo: id)
+        .get();
+    if (results.size != 0) {
+      return SongModel.fromMap(
+          results.docs.first.data() as Map<String, dynamic>);
+    }
+
+    return null;
+  }
+  
 }

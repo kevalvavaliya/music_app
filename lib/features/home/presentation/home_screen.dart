@@ -24,6 +24,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(actions: [
@@ -44,12 +51,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           },
         )
       ]),
-      body: Container(
-        child: TabBarView(controller: _tabController, children: [
-          const HomeTabViewScreen(),
-          const LibararyTabViewScreen(),
-        ]),
-      ),
+      body: TabBarView(controller: _tabController, children: const [
+        HomeTabViewScreen(),
+        LibararyTabViewScreen(),
+      ]),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           color: CustomColors.PRIMARY_COLOR,

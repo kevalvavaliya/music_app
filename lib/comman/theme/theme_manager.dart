@@ -10,6 +10,7 @@ class ThemeManager extends ChangeNotifier {
   ThemeData get lightThemeData => ThemeData(
       brightness: Brightness.light,
       useMaterial3: true,
+      
       colorSchemeSeed: CustomColors.PRIMARY_COLOR,
       scaffoldBackgroundColor: CustomColors.SCAFFOLD_BACKGROUND_LIGHT,
 
