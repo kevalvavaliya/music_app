@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           title: 'Music App',
           theme: ThemeManager.instance.lightThemeData,
           darkTheme: ThemeManager.instance.darkThemeData,
-          themeMode: themeProvider.themeMode,
+          themeMode: themeProvider.getthemeMode(),
           home: Consumer<UserProvider>(
             builder: (context, userProvider, child) {
               if (userProvider.isLoading) {

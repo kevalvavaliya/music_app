@@ -1,3 +1,4 @@
+// enum for firebase auth state
 enum FirebaseAuthStatus {
   invalidEmail,
   userNotFound,
@@ -10,10 +11,5 @@ enum FirebaseAuthStatus {
   success, 
 }
 
-enum FirestoreStatus {
-  success,
-  failed,
-}
-
-
+// enum for song state
 enum SongState{playing,paused,resume,stopped}

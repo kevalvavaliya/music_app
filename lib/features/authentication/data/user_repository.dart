@@ -67,5 +67,4 @@ class UserRepository {
 
     return null;
   }
-  
 }

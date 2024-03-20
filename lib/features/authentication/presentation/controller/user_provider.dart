@@ -68,9 +68,12 @@ class UserProvider extends ChangeNotifier {
     return false;
   }
 
-  // fetch favourite songs list 
-  Future<void> fetchFavouriteSongs() async {
+  // syncing favourite songs list
+  Future<void> syncFavouriteSongs() async {
     if (appUser != null) {
+      // fetching fresh user with fresh favourite songs
+      setUserInAppState(
+          await _userRepository.getUserFromFirestore(appUser!.uid));
       List<SongModel> tempList = [];
       for (String id in appUser!.favouriteSongs) {
         final SongModel? song =
@@ -91,7 +94,6 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  
   List<SongModel> getFavouriteSongsList() {
     return userFavouriteSongsList;
   }

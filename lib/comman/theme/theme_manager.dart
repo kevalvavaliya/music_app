@@ -63,9 +63,7 @@ class ThemeManager extends ChangeNotifier {
       
       );
 
-  //comm
-  //
-  //an styling for elevated button
+  //comman styling for elevated button
   ButtonStyle elevatedButtonstyle = ElevatedButton.styleFrom(
       minimumSize: const Size(double.infinity, 50),
       backgroundColor: CustomColors.PRIMARY_COLOR,

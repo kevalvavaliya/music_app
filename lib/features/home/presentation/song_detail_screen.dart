@@ -48,7 +48,7 @@ class SongDetailScreen extends StatelessWidget {
                       ),
                       CustomFavouriteSongButton(
                         song: song,
-                        size: 35,
+                        size: 30,
                       ),
                     ],
                   ),

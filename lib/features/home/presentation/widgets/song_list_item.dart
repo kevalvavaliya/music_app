@@ -34,6 +34,8 @@ class SongListItem extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
+                      colorFilter: ColorFilter.mode(
+                          Colors.black.withOpacity(0.4), BlendMode.srcOver),
                       fit: BoxFit.cover,
                       image: NetworkImage(song.coverImage),
                     )),
@@ -66,7 +68,9 @@ class SongListItem extends StatelessWidget {
               ],
             ),
           ),
-          CustomFavouriteSongButton(song: song,)
+          CustomFavouriteSongButton(
+            song: song,
+          )
         ],
       ),
     );
