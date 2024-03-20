@@ -6,6 +6,7 @@ import 'package:music_app/features/authentication/domain/user_model.dart';
 import 'package:music_app/features/authentication/presentation/controller/authentication_provider.dart';
 import 'package:music_app/features/authentication/presentation/controller/user_provider.dart';
 import 'package:music_app/features/authentication/presentation/login_screen.dart';
+import 'package:music_app/features/home/presentation/controller/songs_provider.dart';
 import 'package:music_app/features/home/presentation/home_screen.dart';
 import 'package:music_app/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
                 : null);
           },
           lazy: false,
+        ),
+        ChangeNotifierProvider<SongsProvider>(
+          create:(context) =>  SongsProvider(),
         )
       ],
       child: Consumer<ThemeProvider>(

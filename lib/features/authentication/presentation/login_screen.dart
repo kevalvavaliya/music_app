@@ -3,7 +3,9 @@ import 'package:music_app/comman/theme/custom_colors.dart';
 import 'package:music_app/comman/util/constants.dart';
 import 'package:music_app/comman/util/custom_snackbar.dart';
 import 'package:music_app/comman/util/enums.dart';
+import 'package:music_app/comman/widgets/custom_elevated_loading%20_button.dart';
 import 'package:music_app/features/authentication/presentation/controller/authentication_provider.dart';
+import 'package:music_app/features/authentication/presentation/widgets/custom_auth_textfield.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,6 +37,7 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
+  // build method
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,18 +55,10 @@ class LoginScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                   Positioned(
-                    bottom: 0,
-                    left: 16,
-                    child: FittedBox(
-                      child: Text(
-                        'THE BEST',
-                        style: GoogleFonts.tinos(
-                            fontSize: 40,
-                            color: CustomColors.TEXT_COLOR_DARK,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  )
+                      bottom: 0,
+                      left: 16,
+                      child: loginDisplayHeadText('THE BEST',
+                          color: CustomColors.TEXT_COLOR_WHITE))
                 ]),
           ),
           Container(
@@ -73,50 +68,45 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FittedBox(
-                  child: Text(
-                    'MUSIC COLLECTION',
-                    textAlign: TextAlign.start,
-                    style: GoogleFonts.tinos(
-                        fontSize: 40,
-                        // color: CustomColors.TEXT_COLOR_DARK,
-                        fontWeight: FontWeight.w700),
-                  ),
+                loginDisplayHeadText(
+                  'MUSIC COLLECTION',
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                TextField(
-                  controller: emailController,
-                  decoration: const InputDecoration(
-                    hintText: 'email',
-                  ),
-                ),
+                CustomAuthTextField(
+                    textEditingController: emailController,
+                    label: 'email',
+                    textInputType: TextInputType.emailAddress),
                 const SizedBox(
                   height: 20,
                 ),
-                TextField(
-                    controller: passController,
-                    decoration: const InputDecoration(
-                      hintText: 'password',
-                    )),
+                CustomAuthTextField(
+                  textEditingController: passController,
+                  label: 'password',
+                  isPasswordField: true,
+                ),
                 const SizedBox(
                   height: 30,
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      loginOrSignup(context);
-                    },
-                    child: Text('Login/Signup')),
-                // ElevatedButton(
-                //     onPressed: () {
-                //       context.read<ThemeProvider>().toggleThemeMode();
-                //     },
-                //     child: Text('toggle'))
+                CustomElevatedLoadingButton(
+                    label: 'Login/Signup',
+                    onPressed: () => loginOrSignup(context)),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // component
+  Widget loginDisplayHeadText(String text, {Color? color}) {
+    return FittedBox(
+      child: Text(
+        text,
+        style: GoogleFonts.tinos(
+            fontSize: 40, fontWeight: FontWeight.w700, color: color),
       ),
     );
   }

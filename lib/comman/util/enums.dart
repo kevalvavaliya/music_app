@@ -15,4 +15,5 @@ enum FirestoreStatus {
   failed,
 }
 
-enum ThemeMode { light, dark }
+
+enum SongState{playing,paused,resume,stopped}

@@ -29,7 +29,8 @@ class ThemeManager extends ChangeNotifier {
           borderRadius: BorderRadius.circular(50),
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 22),
-      ));
+      ),
+      iconTheme: const IconThemeData(color: CustomColors.PRIMARY_COLOR));
 
   // Dark theme object
   ThemeData get darkThemeData => ThemeData(
@@ -54,9 +55,16 @@ class ThemeManager extends ChangeNotifier {
           borderRadius: BorderRadius.circular(50),
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 22),
-      ));
+      ),
 
-  //comman styling for elevated button
+      iconTheme: const IconThemeData(color: CustomColors.PRIMARY_COLOR),
+
+      
+      );
+
+  //comm
+  //
+  //an styling for elevated button
   ButtonStyle elevatedButtonstyle = ElevatedButton.styleFrom(
       minimumSize: const Size(double.infinity, 50),
       backgroundColor: CustomColors.PRIMARY_COLOR,

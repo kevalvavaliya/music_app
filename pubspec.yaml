@@ -36,6 +36,8 @@ dependencies:
   provider: ^6.1.2
   cloud_firestore: ^4.15.8
   google_fonts: 6.1.0
+  firebase_ui_firestore: ^1.6.2
+  audioplayers: ^5.2.1
   
 dev_dependencies:
   flutter_test:
