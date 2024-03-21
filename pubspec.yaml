@@ -39,11 +39,17 @@ dependencies:
   firebase_ui_firestore: ^1.6.2
   audioplayers: ^5.2.1
   shared_preferences: ^2.2.2
+  shimmer: ^3.0.0
+
   
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test:  
+  fake_cloud_firestore: ^2.4.8
+  firebase_auth_mocks: ^0.13.0
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

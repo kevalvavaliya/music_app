@@ -5,7 +5,6 @@ class SongModel {
   String musicLink;
   String musicName;
   String artistName;
-  bool isFavourite;
   SongState songState;
   String coverImage;
 
@@ -14,7 +13,6 @@ class SongModel {
     required this.musicName,
     required this.musicLink,
     required this.artistName,
-    this.isFavourite = false,
     this.songState = SongState.stopped,
     required this.coverImage,
   });
@@ -33,7 +31,6 @@ class SongModel {
       musicName: musicName ?? this.musicName,
       musicLink: musicLink ?? this.musicLink,
       artistName: artistName ?? this.artistName,
-      isFavourite: isFavourite ?? this.isFavourite,
       songState: songState ?? this.songState,
       coverImage:coverImage?? this.coverImage,
     );
@@ -61,6 +58,6 @@ class SongModel {
 
   @override
   String toString() {
-    return 'SongModel(musicId: $musicId, musicName: $musicName, musicLink: $musicLink, artistName: $artistName, isFavourite: $isFavourite, songState: $songState coverimage: $coverImage)';
+    return 'SongModel(musicId: $musicId, musicName: $musicName, musicLink: $musicLink, artistName: $artistName, songState: $songState coverimage: $coverImage)';
   }
 }

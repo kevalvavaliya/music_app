@@ -4,6 +4,7 @@ import 'package:music_app/comman/theme/theme_provider.dart';
 import 'package:music_app/comman/util/constants.dart';
 import 'package:music_app/comman/util/custom_snackbar.dart';
 import 'package:music_app/features/authentication/presentation/controller/authentication_provider.dart';
+import 'package:music_app/features/home/presentation/controller/search_provider.dart';
 import 'package:music_app/features/home/presentation/controller/songs_provider.dart';
 import 'package:music_app/features/home/presentation/home_tab_view_screen.dart';
 import 'package:music_app/features/home/presentation/library_tab_view_screen.dart';
@@ -37,37 +38,50 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(actions: [
-          Switch.adaptive(
-            value:
-                ThemeMode.dark == context.watch<ThemeProvider>().getthemeMode(),
-            activeThumbImage: const AssetImage(Constants.DARK_THEME_ICON),
-            inactiveThumbImage: const AssetImage(Constants.LIGHT_THEME_ICON),
-            onChanged: (value) {
-              context.read<ThemeProvider>().toggleThemeMode().then((value) {
-                if (!value) {
-                  CustomSnackBar.showSnackbar(
-                      context, 'Failed to change theme');
-                }
-              });
-            },
-          ),
-          PopupMenuButton(
-            itemBuilder: (context) {
-              return [
-                PopupMenuItem(
-                    child: const Text('Logout'),
-                    onTap: () async {
-                      // dispose audio player on logout
-                      await context.read<SongsProvider>().softDispose();
-                      if (context.mounted) {
-                        await context.read<AuthenticationProvider>().signOut();
-                      }
-                    }),
-              ];
-            },
-          )
-        ]),
+        appBar: AppBar(
+            toolbarHeight: 70,
+            title: SearchBar(
+              hintText: 'Search songs',
+
+              trailing: const [Icon(Icons.search)],
+              onChanged: (value) {
+                context.read<SearchProvider>().setSearchKey(value);
+              },
+            ),
+            actions: [
+              Switch.adaptive(
+                value: ThemeMode.dark ==
+                    context.watch<ThemeProvider>().getthemeMode(),
+                activeThumbImage: const AssetImage(Constants.DARK_THEME_ICON),
+                inactiveThumbImage:
+                    const AssetImage(Constants.LIGHT_THEME_ICON),
+                onChanged: (value) {
+                  context.read<ThemeProvider>().toggleThemeMode().then((value) {
+                    if (!value) {
+                      CustomSnackBar.showSnackbar(
+                          context, 'Failed to change theme');
+                    }
+                  });
+                },
+              ),
+              PopupMenuButton(
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                        child: const Text('Logout'),
+                        onTap: () async {
+                          // dispose audio player on logout
+                          await context.read<SongsProvider>().softDispose();
+                          if (context.mounted) {
+                            await context
+                                .read<AuthenticationProvider>()
+                                .signOut();
+                          }
+                        }),
+                  ];
+                },
+              )
+            ]),
         body: TabBarView(controller: _tabController, children: const [
           HomeTabViewScreen(),
           LibararyTabViewScreen(),
