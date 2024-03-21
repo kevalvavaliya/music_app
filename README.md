@@ -15,7 +15,10 @@ A basic music streaming app using flutter
 
 ## Tools and Libraries
 - This app has been created using flutter framework and firebase , for state management in flutter provider package is used.
-
+  
+## APK Download Link
+- https://drive.google.com/file/d/11cpsxbEVJHUhsQxVWGbUm6vmSo63wgD8/view?usp=drive_link
+##
 ## App Snapshots
 
 <img src ='https://github.com/kevalvavaliya/music_app/assets/72963356/b9840f65-4462-45b6-822d-4eaa6d436063' height=700 width=300 />&nbsp;&nbsp;&nbsp;
