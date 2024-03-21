@@ -14,9 +14,10 @@ class PlayerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // if song is not playing return play button
+
     if (songState == SongState.stopped) {
       return IconButton(
-          onPressed: () {
+          onPressed: () async {
             context.read<SongsProvider>().playSong(song);
           },
           icon: Icon(
@@ -41,12 +42,16 @@ class PlayerButton extends StatelessWidget {
           icon: Icon(Icons.play_arrow, size: size));
     }
     // if song is resumed return pause button
-    else {
+    else if (songState == SongState.resume) {
       return IconButton(
           onPressed: () {
             context.read<SongsProvider>().pauseSong();
           },
           icon: Icon(Icons.pause, size: size));
+    } else {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
   }
 }

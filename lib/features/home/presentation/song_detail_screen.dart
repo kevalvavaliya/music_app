@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_app/comman/util/player_helper.dart';
+import 'package:music_app/comman/util/audio_helper.dart';
 import 'package:music_app/comman/widgets/custom_favourite_song_button.dart';
 import 'package:music_app/features/home/domain/song_model.dart';
 import 'package:music_app/features/home/presentation/widgets/current_playing_song_text.dart';

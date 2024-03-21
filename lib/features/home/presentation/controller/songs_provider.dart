@@ -1,16 +1,16 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:music_app/comman/util/enums.dart';
-import 'package:music_app/comman/util/player_helper.dart';
+import 'package:music_app/comman/util/audio_helper.dart';
 import 'package:music_app/features/home/domain/song_model.dart';
 
 class SongsProvider extends ChangeNotifier {
-  final AudioPlayer _audioPlayer = AudioHelper.instance.audioPlayer;
-  
+  late final AudioPlayer _audioPlayer;
 
   SongModel? currentPLayingSong;
 
   SongsProvider() {
+    _audioPlayer = AudioHelper.instance.audioPlayer;
     subScribeToStream();
   }
 
@@ -27,7 +27,6 @@ class SongsProvider extends ChangeNotifier {
   void playSong(SongModel song) async {
     setCurrentPlayingSong(song.copyWith(songState: SongState.playing));
     await _audioPlayer.play(UrlSource(song.musicLink));
-    _audioPlayer.onPlayerStateChanged.listen((event) {});
   }
 
   // pausing song and updating player state to paused
@@ -72,13 +71,9 @@ class SongsProvider extends ChangeNotifier {
     return currentPLayingSong!.songState;
   }
 
-  
-  
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _audioPlayer.dispose();
-    super.dispose();
+  Future<void> softDispose() async {
+    currentPLayingSong = null;
+    await _audioPlayer.release();
+    notifyListeners();
   }
 }

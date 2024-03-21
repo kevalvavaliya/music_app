@@ -43,7 +43,7 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   // fetch theme pereferences from local
-  void getThemeFromPreferences() async {
+  Future<void> getThemeFromPreferences() async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? theme = prefs.getString('theme');

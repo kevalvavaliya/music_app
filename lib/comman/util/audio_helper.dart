@@ -7,7 +7,7 @@ class AudioHelper {
   AudioHelper._();
 
   AudioPlayer get audioPlayer {
-    _audioPlayer ??= AudioPlayer();
+   _audioPlayer = _audioPlayer ?? AudioPlayer();
     return _audioPlayer!;
   }
 

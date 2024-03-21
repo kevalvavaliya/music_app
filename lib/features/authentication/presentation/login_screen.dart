@@ -17,8 +17,8 @@ class LoginScreen extends StatelessWidget {
 
   // login button click handler
   void loginOrSignup(BuildContext context) async {
-    final email = emailController.text;
-    final password = passController.text;
+    final email = emailController.text.trim();
+    final password = passController.text.trim();
     if (email.isEmpty || password.isEmpty) {
       CustomSnackBar.showSnackbar(context, 'Please enter email and password');
       return;

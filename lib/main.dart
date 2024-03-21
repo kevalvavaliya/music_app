@@ -28,9 +28,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // provider for theme purposes
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
+        // provider for auth purposes
         ChangeNotifierProvider(
           create: (context) => AuthenticationProvider(),
         ),
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
                 );
               }
               if (userProvider.getUserFromAppState != null) {
-                return HomeScreen();
+                return  const HomeScreen();
               } else {
                 return LoginScreen();
               }
@@ -76,6 +78,7 @@ class MyApp extends StatelessWidget {
           routes: {
             HomeScreen.routeName: (context) => const HomeScreen(),
             LoginScreen.routeName: (context) => LoginScreen(),
+            
           },
         ),
       ),
