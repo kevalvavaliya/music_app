@@ -4,7 +4,7 @@ class SearchProvider extends ChangeNotifier {
   String _searchKey = "";
 
   void setSearchKey(String searchKey) {
-    _searchKey = searchKey;
+    _searchKey = searchKey.toLowerCase();
     notifyListeners();
   }
 
